@@ -8,9 +8,10 @@
 
 #define f first 
 #define s second
+#define fullmap for(int i = 0 ; i < 16 ; i++)for(int j = 0 ; j < 16 ; j++)
 
 int width = API::mazeWidth();
-int heigth = API::mazeHeight();
+int height = API::mazeHeight();
 int N_MAX = 100;
 
 std::pair<int, int> center[5];
@@ -18,8 +19,7 @@ std::pair<int ,int > add [4];
 char D[4] = {'n' ,'e' ,'s' , 'w'};
 int steps[18][18];
 int stepsback[18][18];
-bool visited[18][18];
-bool node[18][18][4];
+bool node[18][18][4] = {false};
 
 int mouse_direction ;
 
@@ -33,27 +33,16 @@ void setup(){
     center[2] = {7 , 8};
     center[3] = {7 , 7};
     center[4] = {8 , 7};   
-    for ( int i = 0 ; i < width ; i++){
-        for ( int j = 0 ; j < heigth ; j++){
-            for (int k = 0 ; k < 4 ; k++)node[i][j][k] = false;
-            visited[i][j] = false;
-        }
-    }
-    visited[0][0]= true ;
     for ( int i = 0 ; i < 16 ; i++){
         node[i][0][2]    = true  ;
-        node[i][heigth - 1][0] = true;
+        node[i][height - 1][0] = true;
         node[0][i][3] = true ;
         node[width - 1][i][1] = true ;
     }
 }
 
 void refill(){
-    for (int i = 0 ; i < width ; i++){
-        for (int j = 0 ; j < heigth ; j++){
-            steps[i][j]= N_MAX ;
-        }
-    }
+    fullmap steps[i][j]= N_MAX ;
 
     for ( int i = 1 ; i < 5 ; i++){
         API::setText(center[i].f , center[i].s , "" , 0);
@@ -92,27 +81,22 @@ void refill(){
 }
 
 void display(){
-    for ( int i = 0 ; i < width ; i++){
-    for(int j = 0 ; j < heigth ; j++){
+    fullmap{
             API::setText(i ,j , "" , steps[i][j]);
-            if(node[i][j][0] == true )API::setWall(i , j ,'n');
-            if(node[i][j][1] == true )API::setWall(i , j ,'e');
-            if(node[i][j][2] == true )API::setWall(i , j, 's');
-            if(node[i][j][3] == true )API::setWall(i , j ,'w');
+            if(node[i][j][0] )API::setWall(i , j ,'n');
+            if(node[i][j][1] )API::setWall(i , j ,'e');
+            if(node[i][j][2] )API::setWall(i , j, 's');
+            if(node[i][j][3] )API::setWall(i , j ,'w');
         }
-    }
-
 }
 
 void Update_node(){
-    for ( int i = 0 ; i < width ; i++){
-        for( int j = 0 ; j < width ; j++){
-            if(node[i][j][0] == true && j + 1 < heigth)node[i][j+1][2] = true;
+    fullmap{
+            if(node[i][j][0] == true && j + 1 < height)node[i][j+1][2] = true;
             if(node[i][j][1] == true && i + 1 < width )node[i+1][j][3] = true;
             if(node[i][j][2] == true && j - 1 >= 0)node[i][j-1][0] = true ;
             if(node[i][j][3] == true && i - 1 >= 0)node[i-1][j][1] = true;
         }
-    }
 }
 
 bool check_node_center(int x , int y){
@@ -125,7 +109,7 @@ void fillback(){
     std::queue<std::pair<int ,int> > Q;
     Q.push({0,0});
     for ( int i = 0 ; i < width ; i++){
-        for ( int j = 0 ; j <heigth ; j++){
+        for ( int j = 0 ; j <height ; j++){
             stepsback[i][j] = N_MAX;
         }
     }
@@ -145,7 +129,7 @@ void fillback(){
     }
 
     for ( int i = 0 ; i < width ; i++){
-        for ( int j = 0; j < heigth ; j++){
+        for ( int j = 0; j < height ; j++){
             API::setText(i , j , "",stepsback[i][j]);
         }
     }
@@ -161,7 +145,6 @@ void check_wall( int x , int y){
     if ( API::wallLeft() == true ){
         node[x][y][(mouse_direction + 3) % 4]  = true ; API::setWall(x , y , D[(mouse_direction + 3) % 4]);
     }   
-    visited[x][y] = true ;
     API::setColor(x , y, 'B');
 }
 

@@ -15,7 +15,7 @@ const int speed =  255 ;
 
 // encoder right 
 const int EnA_R = 22 ;
-const int EnB_R = 23 ;
+  const int EnB_R = 23 ;
 
 // encoder left 
 const int EnA_L = 24 ;

@@ -27,10 +27,10 @@ void setup(){
     add[1] = {1 , 0};
     add[2] = {0 , -1};
     add[3] = {-1 , 0}; 
-    center[1] = {8 , 8};
-    center[2] = {7 , 8};
-    center[3] = {7 , 7};
-    center[4] = {8 , 7};   
+    center[1] = {15 , 15};
+    center[2] = {15 , 15};
+    center[3] = {15 , 15};
+    center[4] = {15 , 15};   
     for ( int i = 0 ; i < 16 ; i++){
         node[i][0][2]    = true  ;
         node[i][n - 1][0] = true;

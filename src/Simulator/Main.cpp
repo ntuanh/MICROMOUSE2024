@@ -4,6 +4,7 @@
 #include<queue>
 
 #include "API.h"
+#include "Main2.h"
 
 #define f first 
 #define s second
@@ -154,6 +155,7 @@ void check_wall( int x , int y){
 }
 
 int main(int argc, char* argv[]) {
+    //programing();
     setup();
     refill();
     display();

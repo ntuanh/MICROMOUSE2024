@@ -55,10 +55,9 @@ void API::moveForward(int distance) {
 }
 
 void API::turnRight() {
-    /*std::cout << "turnRight" << std::endl;
+    std::cout << "turnRight" << std::endl;
     std::string ack;
-    std::cin >> ack;*/
-    
+    std::cin >> ack;
 }
 
 void API::turnLeft() {
@@ -87,8 +86,8 @@ void API::clearAllColor() {
     std::cout << "clearAllColor" << std::endl;
 }
 
-void API::setText(int x, int y, const std::string& text , int number) {
-    std::cout << "setText " << x << " " << y << " " << text << number << std::endl;
+void API::setText(int x, int y, const std::string& text) {
+    std::cout << "setText " << x << " " << y << " " << text << std::endl;
 }
 
 void API::clearText(int x, int y) {

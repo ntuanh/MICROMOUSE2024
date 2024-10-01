@@ -1,25 +1,6 @@
 #pragma once
 
-
-/* define pin */ 
-
-//Driver 
-const int PWM_A = 20 ; // standby 
-const int AIN_1 =  18 ; // forward 
-const int AIN_2 =  19; 
-const int PWM_B = 8 ;
-const int BIN_1 =  10 ; // forward 
-const int BIN_2 = 9 ;
-const int speed =  255 ;
-
-// encoder right 
-const int EnA_R = 21 ;
-const int EnB_R = 22 ;
-
-// encoder left 
-const int EnA_L = 24 ;
-const int EnB_L = 25 ;
-
+#include <string>
 
 class API {
 
@@ -42,6 +23,10 @@ public:
     static void setColor(int x, int y, char color);
     static void clearColor(int x, int y);
     static void clearAllColor();
+
+    static void setText(int x, int y, const std::string& text);
+    static void clearText(int x, int y);
+    static void clearAllText();
 
     static bool wasReset();
     static void ackReset();

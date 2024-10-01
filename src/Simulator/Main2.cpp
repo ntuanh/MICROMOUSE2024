@@ -58,7 +58,6 @@ void Update_node(){
     }
 }
 
-
 void check_wall( int x , int y){
     if ( API::wallFront() ){
         node[x][y][(mouse_direction + 0) % 4]  = true ; API::setWall(x , y , D[(mouse_direction + 0) % 4]);
@@ -118,6 +117,7 @@ bool check_nei( int x , int y){
     return false;
 
 }
+
 bool check_map(){
     int cnt = unvisited.size();
     for ( int i = 0 ; i < unvisited.size() ; i++)
@@ -197,7 +197,6 @@ void refill(){
     }
 }
 
-
 void move_1( int res ){
     switch (res){
         case 3:
@@ -233,6 +232,7 @@ void show_unvisited(){
     for(int i = 0 ; i < unvisited.size() ; i++)std::cerr << unvisited[i] << " ";
     std::cerr << std::endl;
 }
+
 int main( int argc , char* argv[]){
     setup();
     API::setWall(0 , 0 , 's');
@@ -244,7 +244,7 @@ int main( int argc , char* argv[]){
     unvisited.push_back(0);
     save.push(0);
     int cnt = 0 ;
-    while (true  )  {
+    while (true  )  {                               //  
         visited[x + y*16] = true ;
         //show_visited();
         show_unvisited();
@@ -252,7 +252,7 @@ int main( int argc , char* argv[]){
         check_wall(x , y) ;
         int next_node  = unvisited.back() ;
         fillup_visited();
-        if ( check_map()){API::ackReset() ; std::cerr << "DONE";  break;}
+        if ( check_map()){API::ackReset() ; std::cerr << "DONE";  break;} //else Update_node();
         while ( visited[next_node]){
             unvisited.pop_back();
             next_node = unvisited.back();
@@ -272,6 +272,7 @@ int main( int argc , char* argv[]){
         //Update_node();
         //find_center();
         }
+                                                    // Fl
     refill();
     find_center();
     

@@ -10,6 +10,7 @@ std::pair<int , int > center[5] ;
 
 void setup() 
 {
+    Serial.begin(115200);
     center[1] = {7 , 7};
     center[2] = {8 , 8};
     center[3] = {7 , 8};
@@ -52,9 +53,8 @@ void move ( int *ptr_x  , int *ptr_y , int *ptr_dir)
     (*ptr_y) += add[(*ptr_dir)].second;
 }
 
-int main(int argc, char* argv[]) 
-{
-    setup();
+void loop(){
+    //setup();
     int mouse_direction = 0 ;
     int x = 0 ;
     int y = 0 ;
@@ -67,5 +67,4 @@ int main(int argc, char* argv[])
         std::cerr << *ptr_x << " " << *ptr_y << '\n';
         cnt ++ ;
     }
-    return 0 ;
 }

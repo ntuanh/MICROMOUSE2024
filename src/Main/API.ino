@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <iostream>
 
+
 int API::mazeWidth() {
     std::cout << "mazeWidth" << std::endl;
     std::string response;
@@ -18,24 +19,15 @@ int API::mazeHeight() {
 }
 
 bool API::wallFront() {
-    std::cout << "wallFront" << std::endl;
-    std::string response;
-    std::cin >> response;
-    return response == "true";
+    return wallFront ;
 }
 
 bool API::wallRight() {
-    std::cout << "wallRight" << std::endl;
-    std::string response;
-    std::cin >> response;
-    return response == "true";
+    return wallRight ;
 }
 
 bool API::wallLeft() {
-    std::cout << "wallLeft" << std::endl;
-    std::string response;
-    std::cin >> response;
-    return response == "true";
+    return wallLeft ;
 }
 
 void API::moveForward(int distance) {

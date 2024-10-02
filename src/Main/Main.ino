@@ -7,10 +7,34 @@
 
 std::pair<int , int > center[5] ;
 
+TaskHandle_t Task1;   // reading laser sensor 
+TaskHandle_t Task2;   // controller driver 
 
 void setup() 
 {
-    Serial.begin(115200);
+  Serial.begin(115200);
+  // dual core setup 
+  xTaskCreatePinnedToCore(
+                    Task1code,   /* Task function. */
+                    "Reading Sensor ",     /* name of task. */
+                    10000,       /* Stack size of task */
+                    NULL,        /* parameter of the task */
+                    1,           /* priority of the task */
+                    &Task1,      /* Task handle to keep track of created task */
+                    0);          /* pin task to core 0 */                  
+  delay(500); 
+
+  xTaskCreatePinnedToCore(
+                    Task2code,   /* Task function. */
+                    "ControllerDriver",     /* name of task. */
+                    10000,       /* Stack size of task */
+                    NULL,        /* parameter of the task */
+                    1,           /* priority of the task */
+                    &Task2,      /* Task handle to keep track of created task */
+                    1);          /* pin task to core 1 */
+    delay(500); 
+
+    setup_reading_sensor();
     center[1] = {7 , 7};
     center[2] = {8 , 8};
     center[3] = {7 , 8};
@@ -53,7 +77,8 @@ void move ( int *ptr_x  , int *ptr_y , int *ptr_dir)
     (*ptr_y) += add[(*ptr_dir)].second;
 }
 
-void loop(){
+void Mouse()
+{
     //setup();
     int mouse_direction = 0 ;
     int x = 0 ;
@@ -62,9 +87,39 @@ void loop(){
     int *ptr_y = &y ;
     int *pir_dic = &mouse_direction ;
     int cnt = 0 ;
-    while ( cnt < 10 || !check( x, y) ){
+    while ( !check( x, y) ){
         move(ptr_x , ptr_y  , pir_dic);
         std::cerr << *ptr_x << " " << *ptr_y << '\n';
         cnt ++ ;
     }
 }
+
+//Task1code: read laser sensor and update to API.h
+void Task1code( void * pvParameters ){
+  Serial.print("Task1 running on core ");
+  Serial.println(xPortGetCoreID());
+
+  for(;;)
+  {
+    laser_processing();
+  } 
+}
+
+//Task2code: ... 
+void Task2code( void * pvParameters ){
+  Serial.print("Task2 running on core ");
+  Serial.println(xPortGetCoreID());
+
+  for(;;)
+  {
+    Mouse();
+  }
+}
+
+
+void loop()
+{
+}
+
+
+

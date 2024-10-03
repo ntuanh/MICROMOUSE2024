@@ -16,7 +16,7 @@ int readIndex = 0;
 uint16_t totalFront = 0, totalLeft = 0, totalRight = 0;  // Running totals
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   Wire.begin();  // Initialize I2C on ESP32
 
   delay(1000);  // Wait a moment for the sensors to stabilize
@@ -88,9 +88,9 @@ void loop() {
   // Output just the averaged values for the Serial Plotter (comma-separated)
   Serial.print(avgFront);
   Serial.print(",");
-  Serial.print(avgLeft);
+  Serial.print(avgLeft);  
   Serial.print(",");
   Serial.println(avgRight);
 
-  delay(1000);  // Delay for half a second before the next reading
+  //delay(1000);  // Delay for half a second before the next reading
 }

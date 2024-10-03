@@ -5,17 +5,11 @@
 
 
 int API::mazeWidth() {
-    std::cout << "mazeWidth" << std::endl;
-    std::string response;
-    std::cin >> response;
-    return atoi(response.c_str());
+    return 0 ;
 }
 
 int API::mazeHeight() {
-    std::cout << "mazeHeight" << std::endl;
-    std::string response;
-    std::cin >> response;
-    return atoi(response.c_str());
+    return 0 ;
 }
 
 bool API::wallFront() {
@@ -31,31 +25,15 @@ bool API::wallLeft() {
 }
 
 void API::moveForward(int distance) {
-    std::cout << "moveForward ";
-    // Don't print distance argument unless explicitly specified, for
-    // backwards compatibility with older versions of the simulator
-    if (distance != 1) {
-        std::cout << distance;
-    }
-    std::cout << std::endl;
-    std::string response;
-    std::cin >> response;
-    if (response != "ack") {
-        std::cerr << response << std::endl;
-        throw;
-    }
+  moveForward() ;
 }
 
 void API::turnRight() {
-    std::cout << "turnRight" << std::endl;
-    std::string ack;
-    std::cin >> ack;
+  turnRight() ;
 }
 
 void API::turnLeft() {
-    std::cout << "turnLeft" << std::endl;
-    std::string ack;
-    std::cin >> ack;
+  turnLeft();
 }
 
 void API::setWall(int x, int y, char direction) {
@@ -83,22 +61,15 @@ void API::setText(int x, int y, const std::string& text) {
 }
 
 void API::clearText(int x, int y) {
-    std::cout << "clearText " << x << " " << y << std::endl;
+  
 }
 
 void API::clearAllText() {
-    std::cout << "clearAllText" << std::endl;
 }
 
 bool API::wasReset() {
-    std::cout << "wasReset" << std::endl;
-    std::string response;
-    std::cin >> response;
-    return response == "true";
+  return true ;
 }
 
 void API::ackReset() {
-    std::cout << "ackReset" << std::endl;
-    std::string ack;
-    std::cin >> ack;
 }

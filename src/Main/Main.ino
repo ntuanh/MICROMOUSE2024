@@ -35,6 +35,7 @@ void setup()
     delay(500); 
 
     setup_reading_sensor();
+    setupMotor();
     center[1] = {7 , 7};
     center[2] = {8 , 8};
     center[3] = {7 , 8};
